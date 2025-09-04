@@ -1,0 +1,5 @@
+{
+  "name": "PlayMax",
+  "description": "A modern, responsive movie and series catalog application built with Angular and styled with Tailwind CSS, inspired by the Pobreflix design. It uses the TMDB API to fetch and display media content.",
+  "requestFramePermissions": []
+}

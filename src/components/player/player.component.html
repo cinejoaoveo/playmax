@@ -1,0 +1,49 @@
+<div class="min-h-screen bg-black text-white">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/80 p-4">
+      <div class="container mx-auto flex items-center justify-between">
+        <a routerLink="/home">
+          <img src="https://i.ibb.co/svR50X1n/playmax-logo.png" alt="PlayMax Logo" class="w-36 h-auto">
+        </a>
+        <div class="flex items-center space-x-2">
+            <button (click)="toggleSearch()" class="text-gray-300 hover:text-white p-2 rounded-full hover:bg-white/10">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            </button>
+        </div>
+      </div>
+    </header>
+
+    @if (isSearchOpen()) {
+        <app-search (close)="toggleSearch()"></app-search>
+    }
+
+    <main class="pt-24 container mx-auto px-4 md:px-8 pb-12">
+        @if(playerUrl(); as url) {
+            <h1 class="text-2xl md:text-4xl font-bold mb-4">{{ mediaTitle() }}</h1>
+            <div class="aspect-video w-full max-w-5xl mx-auto bg-gray-900 rounded-lg overflow-hidden shadow-2xl">
+                <iframe 
+                    [src]="url" 
+                    frameborder="0" 
+                    allowfullscreen 
+                    class="w-full h-full">
+                </iframe>
+            </div>
+        } @else {
+            <div class="aspect-video w-full max-w-5xl mx-auto bg-gray-900 rounded-lg flex items-center justify-center">
+                <app-loading></app-loading>
+            </div>
+        }
+
+        <!-- Recommendations -->
+        @if (recommendations().length > 0) {
+            <section class="mt-12">
+                <h2 class="text-2xl font-bold mb-4">Recomendações</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
+                    @for (item of recommendations(); track item.id) {
+                        <app-media-card [mediaItem]="item"></app-media-card>
+                    }
+                </div>
+            </section>
+        }
+    </main>
+</div>

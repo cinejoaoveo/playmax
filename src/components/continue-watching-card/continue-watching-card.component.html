@@ -1,0 +1,38 @@
+@if (item(); as item) {
+  <a [routerLink]="playerLink()" target="_blank" class="block group relative rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-110 hover:z-20">
+    <!-- Base Image -->
+    <img 
+      [ngSrc]="getPosterUrl(item.poster_path)" 
+      [alt]="item.title || item.name" 
+      width="500" 
+      height="750" 
+      class="w-full h-full object-cover aspect-[2/3] bg-gray-800 transition-all duration-300 group-hover:blur-sm group-hover:brightness-50">
+    
+    <!-- Hover Overlay with all elements -->
+    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <!-- Gradient for title readability -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+
+        <!-- Play Icon -->
+        <div class="w-full h-full flex items-center justify-center">
+            <img 
+              src="https://i.ibb.co/Q7V0pybV/bot-o-play-sem-bg.png" 
+              alt="Play" 
+              class="w-24 h-24 object-contain drop-shadow-lg transform scale-75 group-hover:scale-100 transition-transform duration-300"
+            />
+        </div>
+        
+        <!-- Title -->
+        <div class="absolute bottom-0 left-0 right-0 p-3">
+            <h3 class="font-bold text-white drop-shadow-md line-clamp-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">{{ item.title || item.name }}</h3>
+        </div>
+    </div>
+
+    <!-- Episode Badge for Series -->
+    @if(item.type === 'tv' && item.seasonNumber && item.episodeNumber) {
+        <div class="absolute top-2 left-2 bg-black/70 text-white text-xs font-bold px-2 py-1 rounded">
+            S{{ item.seasonNumber }} E{{ item.episodeNumber }}
+        </div>
+    }
+  </a>
+}
