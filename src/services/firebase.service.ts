@@ -1,6 +1,6 @@
 import { Injectable, signal, NgZone, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { initializeApp, getApps } from 'firebase/app';
+import { initializeApp, getApps, FirebaseApp, getApp } from 'firebase/app';
 import {
   getAuth,
   signInWithPopup,
@@ -30,14 +30,17 @@ export class FirebaseService {
   private readonly router = inject(Router);
   private readonly ngZone = inject(NgZone);
 
+  private app: FirebaseApp;
   private auth: Auth;
   currentUser = signal<User | null>(null);
 
   constructor() {
     if (!getApps().length) {
-      initializeApp(firebaseConfig);
+      this.app = initializeApp(firebaseConfig);
+    } else {
+      this.app = getApp();
     }
-    this.auth = getAuth();
+    this.auth = getAuth(this.app);
 
     onAuthStateChanged(this.auth, user => {
       this.ngZone.run(() => {

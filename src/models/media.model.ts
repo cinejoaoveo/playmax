@@ -1,5 +1,3 @@
-
-
 export interface Media {
   id: number;
   title?: string;
@@ -69,7 +67,6 @@ export interface Genre {
   name: string;
 }
 
-// FIX: Add missing AuthCredential interface
 export interface AuthCredential {
   email: string;
   password: string;

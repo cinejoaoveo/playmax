@@ -4,6 +4,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
 import { provideRouter, withHashLocation } from '@angular/router';
 import { provideZonelessChangeDetection } from '@angular/core';
+import 'firebase/auth';
 
 import { AppComponent } from './src/app.component';
 import { APP_ROUTES } from './src/app.routes';
