@@ -45,5 +45,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "1670419f-e4da-460f-aafd-ed1eb72d95b7"
   }
 }
